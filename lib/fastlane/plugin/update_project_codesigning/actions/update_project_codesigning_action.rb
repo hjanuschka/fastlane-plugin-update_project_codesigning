@@ -10,12 +10,15 @@ module Fastlane
         File.write(path, p.gsub(/ProvisioningStyle = .*;/, "ProvisioningStyle = #{params[:use_automatic_signing] ? 'Automatic' : 'Manual'};"))
         UI.success("Successfully updated project settings to use ProvisioningStyle '#{params[:use_automatic_signing] ? 'Automatic' : 'Manual'}'")
       end
+
       def self.description
         "Updates the Xcode 8 Automatic Codesigning Flag"
       end
+
       def self.details
         "Updates the Xcode 8 Automatic Codesigning Flag of all targets in the project"
       end
+
       def self.available_options
         [
           FastlaneCore::ConfigItem.new(key: :path,
@@ -30,13 +33,17 @@ module Fastlane
                                        default_value: false)
         ]
       end
+
       def self.output
       end
+
       def self.return_value
       end
+
       def self.authors
         ["mathiasAichinger"]
       end
+
       def self.is_supported?(platform)
         [:ios, :mac].include?(platform)
       end
