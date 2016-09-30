@@ -1,4 +1,11 @@
-# os: osx # enable this if you need macOS support
 language: ruby
 rvm:
-  - 2.2.4
+- 2.2.4
+deploy:
+  provider: rubygems
+  api_key:
+    secure: K9ouRvleLH5x3SV7SpWtto5HN7/Pv3pe1Q94qwrnKmi4lYBliRaiIJCi6iSDeiw00C1qwmpRn0lRUz8ZQpeZU6GwJQ4w2BaTCPbmcHBhzYgiN5xYL6GmSymiI/Db8n5GOlxWlSZFkZVwkWzrebz0YhJdwKZv4PFIj1ncQIsfyYQQafQKroqqOCWvp556n43xfONxutx/XwqSBEri0ZSPj0OMOOYQRh5LAC21h448O3iDW6fhSH2/W7If6tDZ05eUUFmn0bkSVmsqEbhcLMv6MLztOX4GFEgV/ZnmhGDKCSI+W9LdOjp3bpjAU2WABPE6kRJcBg3uj6Ho7GUbVQl4P9h3sRmiGVVausH5NXITvU46wQYeuTgg67HpE/mH9C4JpWDn04H8JaSSjWYTRtP9oR5WCEBeTkYg1hyYuDW7/SjyeR34+W/DQ9EyI8Sg2NoRPUKU74lJ2++G09NwAvpr4zNhM/4eS4JGxIXY0Ulpgs4fQtTHHtxXM0gYumdkPM7aUU6NfhiRqKpsC8X9XBbV6BKIUaPtF+vb1L2FSm/6TvxC06FY2fGo0pjgAdCr7XSF/WaZCYA/9dvQH7KnqW4RmuVZGCaqdv47AuRFjWR2Lk+e50HD4Qh6zN1G9IVDQKvLunrpswfxKbzPqcE67/9NjYnf8xenwMuiKuSJQqNllrY=
+  gem: fastlane-plugin-update_project_codesigning
+  on:
+    branch: master
+    repo: hjanuschka/fastlane-plugin-update_project_codesigning
