@@ -6,6 +6,7 @@ require 'fastlane/plugin/update_project_codesigning/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-update_project_codesigning'
   spec.version       = Fastlane::UpdateProjectCodesigning::VERSION
+  spec.version = "#{spec.version}-alpha-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.author        = %q{Helmut Januschka}
   spec.email         = %q{h.januschka@krone.at}
 
