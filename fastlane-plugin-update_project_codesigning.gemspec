@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Fastlane::UpdateProjectCodesigning::VERSION
   spec.version = "#{spec.version}-alpha-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.author        = %q{Helmut Januschka}
-  spec.email         = %q{h.januschka@krone.at}
+  spec.email         = %q{helmut@januschka.com}
 
   spec.summary       = %q{Updates the Xcode 8 Automatic Codesigning Flag}
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-update_project_codesigning"
+  spec.homepage      = "https://github.com/hjanuschka/fastlane-plugin-update_project_codesigning"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
