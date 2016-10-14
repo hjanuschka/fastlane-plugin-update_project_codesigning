@@ -3,7 +3,7 @@ module Fastlane
     class UpdateProjectCodesigningAction < Action
       def self.run(params)
         path = params[:path]
-        path = File.join(path, "project.pbxproj")
+        path = File.join(File.expand_path(path), "project.pbxproj")
         UI.user_error!("Could not find path to project config '#{path}'. Pass the path to your project (not workspace)!") unless File.exist?(path)
         UI.message("Updating the Automatic Codesigning flag to #{params[:use_automatic_signing] ? 'enabled' : 'disabled'} for the given project '#{path}'")
         p = File.read(path)
