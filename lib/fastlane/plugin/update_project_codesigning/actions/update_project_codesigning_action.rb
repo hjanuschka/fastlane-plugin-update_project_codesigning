@@ -25,7 +25,7 @@ module Fastlane
                                        env_name: "FL_PROJECT_SIGNING_PROJECT_PATH",
                                        description: "Path to your Xcode project",
                                        verify_block: proc do |value|
-                                         UI.user_error!("Path is invalid") unless File.exist?(value)
+                                         UI.user_error!("Path is invalid") unless File.exist?(File.expand_path(value))
                                        end),
           FastlaneCore::ConfigItem.new(key: :use_automatic_signing,
                                        env_name: "FL_PROJECT_USE_AUTOMATIC_SIGNING",
