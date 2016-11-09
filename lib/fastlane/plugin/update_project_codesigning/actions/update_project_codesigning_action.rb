@@ -5,12 +5,11 @@ module Fastlane
       def self.run(params)
         path = params[:path]
         path = File.join(File.expand_path(path), "project.pbxproj")
-        
-        
+
         project = Xcodeproj::Project.open(params[:path])
         UI.user_error!("Could not find path to project config '#{path}'. Pass the path to your project (not workspace)!") unless File.exist?(path)
         UI.message("Updating the Automatic Codesigning flag to #{params[:use_automatic_signing] ? 'enabled' : 'disabled'} for the given project '#{path}'")
-        project.root_object.attributes["TargetAttributes"].each do | target, sett | 
+        project.root_object.attributes["TargetAttributes"].each do |target, sett|
           sett["ProvisioningStyle"] = params[:use_automatic_signing] ? 'Automatic' : 'Manual'
         end
         project.save
