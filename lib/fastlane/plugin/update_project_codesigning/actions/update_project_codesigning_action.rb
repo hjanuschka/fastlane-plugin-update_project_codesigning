@@ -35,6 +35,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :use_automatic_signing,
                                        env_name: "FL_PROJECT_USE_AUTOMATIC_SIGNING",
                                        description: "Defines if project should use automatic signing",
+                                       is_string: false,
                                        default_value: false)
         ]
       end

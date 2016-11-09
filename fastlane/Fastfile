@@ -1,3 +1,4 @@
 lane :test do
   update_project_codesigning(path: "demo-project/demo/demo.xcodeproj")
+  update_project_codesigning(path: "demo-project/demo/demo.xcodeproj", use_automatic_signing: true)
 end
