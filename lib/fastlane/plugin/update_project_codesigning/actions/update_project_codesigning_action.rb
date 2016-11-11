@@ -13,7 +13,7 @@ module Fastlane
         unless project.root_object.attributes["TargetAttributes"]
           UI.error("Seems to be a very old project file format")
           UI.error("PLEASE BACKUP ALL FILES before doing this.")
-          if UI.confirm("Proceed with upgrade to xcode8 format?")
+          if UI.confirm("Proceed with upgrade to xcode8 format?") || ENV["FL_PROJECT_SIGNING_FORCE_UPGRADE"]
             UI.important("Upgrading project to use xcode8 signing stuff")
             unless params[:team_id]
               UI.important("TEAM id is not set")
