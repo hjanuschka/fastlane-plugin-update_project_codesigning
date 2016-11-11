@@ -194,12 +194,12 @@
 					771D79501D9E69C900D840FA = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = G3KGXDXQL9;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					77C503031DD3175E00AC8FF0 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = G3KGXDXQL9;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
