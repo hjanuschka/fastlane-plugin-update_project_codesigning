@@ -47,6 +47,7 @@ module Fastlane
 
         project.root_object.attributes["TargetAttributes"].each do |target, sett|
           sett["ProvisioningStyle"] = params[:use_automatic_signing] ? 'Automatic' : 'Manual'
+          sett["DevelopmentTeam"] = params[:team_id] if params[:team_id]
         end
         project.save
         UI.success("Successfully updated project settings to use ProvisioningStyle '#{params[:use_automatic_signing] ? 'Automatic' : 'Manual'}'")
@@ -75,6 +76,7 @@ module Fastlane
                                        default_value: false),
           FastlaneCore::ConfigItem.new(key: :team_id,
                                         env_name: "FASTLANE_TEAM_ID",
+                                        optional: true,
                                         description: "Team ID, is used when upgrading project",
                                         is_string: true)
         ]
