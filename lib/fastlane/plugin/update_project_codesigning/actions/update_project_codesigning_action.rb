@@ -3,6 +3,7 @@ module Fastlane
   module Actions
     class UpdateProjectCodesigningAction < Action
       def self.run(params)
+        FastlaneCore::PrintTable.print_values(config: params, title: "Summary for Update Project Codesigning")
         path = params[:path]
         path = File.join(File.expand_path(path), "project.pbxproj")
 
@@ -35,7 +36,6 @@ module Fastlane
             end
 
             # for each configuration set a signing identity
-
             project.build_configurations.each do |config|
               config.build_settings['CODE_SIGN_IDENTITY[sdk=iphoneos*]'] = config.name == "Release" ? 'iPhone Distribution' : "iPhone Development"
             end
@@ -45,12 +45,37 @@ module Fastlane
           end
         end
 
+        target_dictionary = project.targets.map { |f| { name: f.name, uuid: f.uuid } }
+        changed_targets = []
         project.root_object.attributes["TargetAttributes"].each do |target, sett|
+          found_target = target_dictionary.detect { |h| h[:uuid] == target }
+          if params[:targets]
+            # get target name
+            unless params[:targets].include?(found_target[:name])
+              UI.important("Skipping #{found_target[:name]} not selected (#{params[:targets].join(',')})")
+              next
+            end
+          end
+
           sett["ProvisioningStyle"] = params[:use_automatic_signing] ? 'Automatic' : 'Manual'
           sett["DevelopmentTeam"] = params[:team_id] if params[:team_id]
+          changed_targets << found_target[:name]
         end
         project.save
-        UI.success("Successfully updated project settings to use ProvisioningStyle '#{params[:use_automatic_signing] ? 'Automatic' : 'Manual'}'")
+
+        if changed_targets.length == 0
+          UI.important("None of the specified targets has been modified")
+          UI.important("available targets:")
+          target_dictionary.each do |tar|
+            UI.important("\t* #{tar[:name]}")
+          end
+        else
+          UI.success("Successfully updated project settings to use ProvisioningStyle '#{params[:use_automatic_signing] ? 'Automatic' : 'Manual'}'")
+          UI.success("Modified Targets:")
+          changed_targets.each do |tar|
+            UI.success("\t * #{tar}")
+          end
+        end
       end
 
       def self.description
@@ -78,7 +103,13 @@ module Fastlane
                                         env_name: "FASTLANE_TEAM_ID",
                                         optional: true,
                                         description: "Team ID, is used when upgrading project",
-                                        is_string: true)
+                                        is_string: true),
+          FastlaneCore::ConfigItem.new(key: :targets,
+                                       env_name: "FL_PROJECT_SIGNING_TARGETS",
+                                       optional: true,
+                                       type: Array,
+                                       description: "Specify targets you want to toggle the signing mech. (default to all targets)",
+                                       is_string: false)
         ]
       end
 

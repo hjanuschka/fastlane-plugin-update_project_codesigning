@@ -1,6 +1,10 @@
 lane :test do
   update_project_codesigning(path: "demo-project/demo/demo.xcodeproj")
 end
+
+lane :test_targets do
+  update_project_codesigning(path: "demo-project/demo/demo.xcodeproj", targets: ["abc", "demo"])
+end
 lane :test_toggle do
   update_project_codesigning(path: "demo-project/demo/demo.xcodeproj")
   update_project_codesigning(path: "demo-project/demo/demo.xcodeproj", use_automatic_signing: true)
