@@ -116,7 +116,15 @@ module Fastlane
       def self.output
       end
 
+      def self.deprecated_notes
+        "This plugin is deprecated in favor of core action shipped with fastlane, parameters are exactly the same, new action name is automatic_code_signing, there are also some helpers enable_automatic_code_signing, disable_automatic_code_signing where you only need the project path set :)"
+      end
+
       def self.return_value
+      end
+
+      def self.category
+        :deprecated
       end
 
       def self.authors
